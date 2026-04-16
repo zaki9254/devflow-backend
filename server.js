@@ -19,6 +19,8 @@ const errorHandler = require("./src/middleware/errorHandler");
 connectDB();
 
 const app = express();
+// Trust proxy — required for rate limiting on Render/Railway
+app.set("trust proxy", 1);
 
 // Raw body needed for Stripe webhook signature verification
 app.use("/api/billing/webhook", express.raw({ type: "application/json" }));
