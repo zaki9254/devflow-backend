@@ -5,9 +5,11 @@ const generateToken = require("../utils/generateToken");
 const generateSlug = require("../utils/generateSlug");
 let redis;
 try {
-  redis = require("../config/redis");
-} catch (e) {
-  redis = null;
+  if (redis) {
+    await redis.del(`session:${req.user._id}`);
+  }
+} catch (redisError) {
+  console.log("Redis unavailable, skipping session delete");
 }
 
 const register = async (req, res) => {
