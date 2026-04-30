@@ -70,7 +70,6 @@ const register = async (req, res) => {
   console.log("1. Register hit");
   try {
     const { name, email, password, workspaceName } = req.body;
-    console.log("2. Body:", { name, email, workspaceName });
 
     if (!name || !email || !password || !workspaceName) {
       return res.status(400).json({
